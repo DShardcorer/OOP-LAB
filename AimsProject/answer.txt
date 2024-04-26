@@ -1,0 +1,68 @@
+Question:
+- If you create a constructor method to build a DVD by title then create a constructor method to
+build a DVD by category. Does JAVA allow you to do this?
+
+Yes, It's called constructor overloading.
+----------
+16. Explanation:
+Each object accessed its own class'toString(), which overrode the original toString() of objects. By implementing different versions of a method in subclasses, we can call those methods, which are local to those subclasses, accordingly. This is also called polymorphism.
+
+
+
+
+Reading Assignment:
+1. What are the advantages of Polymorphism?
+Polymorphism in object-oriented programming, particularly in Java, offers several key benefits:
+
+Flexibility and Maintainability: It allows for more adaptable code since you can use a common interface or superclass to interact with various subclasses or implementing classes. This reduces the need to alter existing code when new types are added.
+Code Reusability: Polymorphism lets you write generic code that can operate with different data types. This leads to less code duplication, as the same code can be used with various derived classes or interfaces.
+Extensibility: It provides the ability to extend systems without affecting the existing code base. This means you can add new functionality or classes without breaking existing implementations.
+Decoupling: It encourages a design approach where components are loosely connected, making the code easier to test, debug, and maintain.
+2. How is Inheritance useful to achieve Polymorphism in Java?
+Inheritance allows a class to inherit properties and behaviors from a superclass, creating an "is-a" relationship. This plays a significant role in achieving polymorphism in several ways:
+
+Type Hierarchy: With inheritance, you can create a hierarchy of classes where a superclass defines common behavior, and subclasses inherit these properties. This enables the use of different subclasses in polymorphic contexts.
+Method Overriding: Inheritance allows subclasses to override superclass methods to provide specific behaviors. This is crucial for polymorphism, as it allows a single method to act differently depending on the object's runtime type.
+Substitutability: Since a subclass "is-a" superclass, you can use subclass objects wherever a superclass reference is expected, enabling polymorphic behavior in method calls and object assignments.
+3. What are the differences between Polymorphism and Inheritance in Java?
+Polymorphism and inheritance are related concepts, but they serve different purposes:
+
+Definition: Polymorphism is the ability of different objects to respond to the same method in different ways. It allows methods to behave based on the object's runtime type. Inheritance, by contrast, is a mechanism through which a class inherits fields and methods from a superclass, establishing a parent-child relationship.
+Scope: Inheritance mainly establishes relationships between classes regarding structure and behavior. Polymorphism, however, focuses on behavior, allowing for flexible interactions with objects of different types through a common interface or superclass.
+Purpose: Inheritance is used to establish a class hierarchy for code reuse and to support method overriding. Polymorphism uses this hierarchy to create flexible and adaptable code, where methods can operate on objects with varying types.
+
+-------------
+Implementing Comparable:
+The class that represents your cart items should implement the Comparable interface, such as CartItem, Product, or similar. This class will define a natural ordering for your objects.
+Defining compareTo() for Ordering:
+The compareTo() method is used to determine the ordering between two objects. It should return:
+0 for equal objects.
+A positive number if the current object is "greater than" the argument.
+A negative number if the current object is "less than" the argument.
+Determine the relevant attributes to compare. For example, compare by title, then by cost.
+Multiple Ordering Rules:
+The Comparable interface provides a single natural ordering. If you need additional sorting logic, consider two approaches:
+Subclasses: Create subclasses that implement Comparable, each with their own compareTo() method.
+Comparators: Use the Comparator interface for custom sorting logic. Comparators can be applied when sorting with collections like Collections.sort().
+Implementing DVD-Specific Ordering:
+For unique ordering rules for specific types, like DVD, we can create a subclass implementing Comparable. This subclass defines its custom compareTo() method, for example:
+java
+
+public class DVD extends CartItem implements Comparable<DVD> {
+    private int length;
+
+    @Override
+    public int compareTo(DVD other) {
+        int titleComparison = getTitle().compareTo(other.getTitle());
+        if (titleComparison != 0) {
+            return titleComparison;
+        }
+
+        int lengthComparison = Integer.compare(length, other.length);
+        if (lengthComparison != 0) {
+            return -lengthComparison; // Descending order for length
+        }
+
+        return Double.compare(getCost(), other.getCost());
+    }
+}

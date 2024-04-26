@@ -1,0 +1,21 @@
+package hust.soict.globalict.aims.media;
+import java.util.Comparator;
+
+
+public class MediaComparatorByTitleCost implements Comparator<Media>{
+
+	public MediaComparatorByTitleCost() {
+		// TODO Auto-generated constructor stub
+	}
+	@Override
+    public int compare(Media m1, Media m2) {
+        int titleComparison = m1.getTitle().compareToIgnoreCase(m2.getTitle());
+
+       
+        if (titleComparison == 0) {
+            return Double.compare(m1.getCost(), m2.getCost());
+        }
+
+        return titleComparison;
+    }
+}
