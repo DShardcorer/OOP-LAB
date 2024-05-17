@@ -7,9 +7,16 @@ import hust.soict.globalict.aims.media.*;
 
 
 public class Store {
-	public static final int MAX_NUMBER_IN_STORE = 40;
+	public static int MAX_NUMBER_IN_STORE = 40;
 	private List<Media> itemsInStore = new ArrayList<Media>();
+	public Store() {
+		super();
+	}
 
+	public Store(List<Media> itemsInStore) {
+		super();
+		this.itemsInStore = itemsInStore;
+	}
 	public List<Media> getItemsInStore() {
 		return itemsInStore;
 	}

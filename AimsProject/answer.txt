@@ -66,3 +66,63 @@ public class DVD extends CartItem implements Comparable<DVD> {
         return Double.compare(getCost(), other.getCost());
     }
 }
+-------------------
+Lab04
+-------------------
+1.3 Compare Swing and AWT elements:
+--Top-Level Containers
++AWT:
+
+Frame: The main window used in AWT applications.
+Dialog: A window used for dialog boxes.
+Applet: Used for applets.
+
++Swing:
+
+JFrame: The Swing equivalent of Frame, used as the main window.
+JDialog: The Swing equivalent of Dialog, used for dialog boxes.
+JApplet: The Swing equivalent of Applet, used for applets.
+
+-Comparison:
+
+Swing top-level containers (JFrame, JDialog, JApplet) are lightweight components, meaning they are written entirely in Java and are more flexible.
+AWT top-level containers are heavyweight components, which rely on the native operating system's windowing system.
+
+--Class Names of Components
+
+-Comparison:
+
+Swing component names typically start with 'J' (e.g., JButton vs Button).
+Swing components are more versatile and offer more features, such as better look-and-feel customization and support for tooltips.
+
+--Event Handling
++AWT:
+
+Event handling in AWT is based on the delegation event model.
+Events are handled by implementing specific listener interfaces (e.g., ActionListener, MouseListener).
+
++Swing:
+
+Swing also uses the delegation event model.
+Similar to AWT, Swing event handling involves implementing listener interfaces and registering them with components.
+
+-Comparison:
+
+Event handling in both AWT and Swing is quite similar. Both use the delegation event model, and listeners are registered to handle events.
+The primary difference lies in the classes used (e.g., Button vs JButton).
+
+--Appearance
++AWT:
+
+AWT components are rendered by the native GUI toolkit of the operating system, so their appearance can vary across different platforms.
+AWT components are less customizable.
+
++Swing:
+
+Swing components are rendered by Java's lightweight GUI toolkit, which allows for a consistent look-and-feel across platforms.
+Swing supports pluggable look-and-feel, meaning you can change the appearance of Swing applications using different themes (e.g., Nimbus, Metal).
+
+-Comparison:
+
+Swing applications can look more modern and consistent across different platforms compared to AWT applications.
+Swing provides more flexibility and customizability in terms of appearance and behavior of the components.
