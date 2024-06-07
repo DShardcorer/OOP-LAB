@@ -1,5 +1,6 @@
 package hust.soict.globalict.aims.screen.customer.controller;
 
+import hust.soict.globalict.aims.cart.Cart;
 import hust.soict.globalict.aims.media.Media;
 import hust.soict.globalict.aims.media.Playable;
 import javafx.event.ActionEvent;
@@ -23,16 +24,25 @@ public class ItemController {
     @FXML
     private Label lblCost;
 
+    private Media media;
+
+	private Cart cart;
+	
     @FXML
     void btnAddToCartClicked(ActionEvent event) {
-
+    	cart.addMedia(media);
     }
 
     @FXML
     void btnPlayClicked(ActionEvent event) {
-
+    	//TODO
     }
-    private Media media;
+
+
+    
+    public ItemController(Cart cart) {
+    	this.cart = cart;
+    }
     public void setData(Media media) {
     	this.media = media;
     	lblTitle.setText(media.getTitle());

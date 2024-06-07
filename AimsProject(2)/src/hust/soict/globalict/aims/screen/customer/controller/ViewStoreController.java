@@ -12,11 +12,15 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.stage.Stage;
 
 public class ViewStoreController {
 	private Store store;
@@ -58,6 +62,21 @@ public class ViewStoreController {
 	}
     @FXML
     void btnViewCartPressed(ActionEvent event) {
+    	try {
+    		final String CART_FXML_FILE_PATH = "/hust/soict/globalict/aims/screen/customer/view/Cart.fxml";
+    		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(CART_FXML_FILE_PATH));
+    		fxmlLoader.setController(new CartController(store, cart));
+    		//Original: CartController(store, cart)
+    		Parent root = fxmlLoader.load();
+    		Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+    		stage.setScene(new Scene(root));
+    		stage.setTitle("Cart");
+    		stage.show();
+    		
+    		
+    	} catch(IOException e) {
+    		e.printStackTrace();
+    	}
     }
 
 }

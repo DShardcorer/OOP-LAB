@@ -2,6 +2,9 @@ package hust.soict.globalict.aims.screen.customer.controller;
 
 import hust.soict.globalict.aims.cart.Cart;
 import hust.soict.globalict.aims.media.*;
+import hust.soict.globalict.aims.store.Store;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -41,8 +44,10 @@ public class CartController {
     private TableView<Media> tblMedia;
     
     private Cart cart;
+    private Store store;
     
-    public CartController(Cart cart) {
+    public CartController(Store store, Cart cart) {
+    	this.store = store;
         this.cart = cart;
     }
     
@@ -55,6 +60,8 @@ public class CartController {
     @FXML
     void btnRemovePressed(ActionEvent event) {
         // Add your code for remove button press action
+    	Media media = tblMedia.getSelectionModel().getSelectedItem();
+    	cart.removeMedia(media);
     }
 
     @FXML
@@ -72,9 +79,32 @@ public class CartController {
         if (cart.getItemsOrdered() != null) {
             tblMedia.setItems(cart.getItemsOrdered());
         }
-
+        
+        btnPlay.setVisible(false);
+        btnRemove.setVisible(false);
+        
+        tblMedia.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Media>() {
+            @Override
+            public void changed(ObservableValue<? extends Media> observable, Media oldValue, Media newValue) {
+                updateButtonBar(newValue);
+            }
+        });
         // Optionally update the cost label
         updateCostLabel();
+    }
+    
+    void updateButtonBar(Media media) {
+    	if(media == null) {
+    		btnPlay.setVisible(false);
+    		btnRemove.setVisible(false);
+    	}else {
+    		btnRemove.setVisible(true);
+    		if(media instanceof Playable) {
+    			btnPlay.setVisible(true);
+    		}else {
+    			btnPlay.setVisible(false);
+    		}
+    	}
     }
     
     private void updateCostLabel() {
