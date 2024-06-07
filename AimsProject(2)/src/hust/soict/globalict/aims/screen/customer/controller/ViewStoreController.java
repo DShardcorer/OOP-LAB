@@ -25,6 +25,8 @@ import javafx.stage.Stage;
 public class ViewStoreController {
 	private Store store;
 	private Cart cart;
+	
+	
 	@FXML
 	private GridPane gridPane;
 	
@@ -33,6 +35,7 @@ public class ViewStoreController {
 	}
 	@FXML
 	public void initialize() {
+		cart = new Cart();
 		final String ITEM_FXML_FILE_PATH = "/hust/soict/globalict/aims/screen/customer/view/Item.fxml";
 		int column = 0;
 		int row = 1;

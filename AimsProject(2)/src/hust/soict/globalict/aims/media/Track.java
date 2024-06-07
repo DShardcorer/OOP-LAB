@@ -1,5 +1,7 @@
 package hust.soict.globalict.aims.media;
 
+import hust.soict.globalict.aims.exception.PlayerException;
+
 public class Track implements Playable{
 	private String title;
 	private int length;
@@ -31,10 +33,14 @@ public class Track implements Playable{
 	public int getLength() {
 		return length;
 	}
-	public void play() {
+	public void play() throws PlayerException{
+		if(this.getLength()>0) {
 		System.out.println("Playing Track: " + this.getTitle());
 		System.out.println("Track length: " + this.getLength());
+	}else {
+		throw new PlayerException("Error: DVD length non positive");
 	}
+		}
 	@Override
 	public boolean equals(Object obj) {
 	    if (this == obj) { // If they refer to the same object in memory

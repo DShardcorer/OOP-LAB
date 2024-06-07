@@ -2,6 +2,9 @@ package hust.soict.globalict.aims.cart;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.naming.LimitExceededException;
+
 import hust.soict.globalict.aims.media.Media;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -14,10 +17,21 @@ public class Cart {
     public ObservableList<Media> getItemsOrdered() {
         return itemsOrdered;
     }
+    public Cart() {
+    	super();
+    }
+    public Cart(ObservableList<Media> itemsOrdered) {
+		super();
+		this.itemsOrdered = itemsOrdered;
+	}
 
-    // Add media to the cart
-    public void addMedia(Media media) {
-        itemsOrdered.add(media);
+	// Add media to the cart
+    public void addMedia(Media media) throws LimitExceededException {
+        if(itemsOrdered.size() < MAX_NUMBER_ORDERED) {
+        	itemsOrdered.add(media);
+        }else {
+        	throw new LimitExceededException("Error: the number of medias in cart peaked");
+        }
     }
     
     // Remove media from the cart
