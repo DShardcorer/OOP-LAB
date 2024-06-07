@@ -33,9 +33,16 @@ public class ViewStoreController {
 	public ViewStoreController(Store store) {
 		this.store=store;
 	}
+	public ViewStoreController(Store store, Cart cart) {
+		this.store=store;
+		this.cart=cart;
+	}
 	@FXML
 	public void initialize() {
-		cart = new Cart();
+		
+		if(cart == null) {
+			cart = new Cart();
+		}
 		final String ITEM_FXML_FILE_PATH = "/hust/soict/globalict/aims/screen/customer/view/Item.fxml";
 		int column = 0;
 		int row = 1;

@@ -1,5 +1,7 @@
 package hust.soict.globalict.aims.screen.customer.controller;
 
+import javax.naming.LimitExceededException;
+
 import hust.soict.globalict.aims.cart.Cart;
 import hust.soict.globalict.aims.media.Media;
 import hust.soict.globalict.aims.media.Playable;
@@ -30,7 +32,12 @@ public class ItemController {
 	
     @FXML
     void btnAddToCartClicked(ActionEvent event) {
-    	cart.addMedia(media);
+    	try {
+			cart.addMedia(media);
+		} catch (LimitExceededException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     }
 
     @FXML

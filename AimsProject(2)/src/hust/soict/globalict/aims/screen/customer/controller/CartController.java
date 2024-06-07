@@ -1,5 +1,8 @@
 package hust.soict.globalict.aims.screen.customer.controller;
 
+import java.io.IOException;
+
+
 import hust.soict.globalict.aims.cart.Cart;
 import hust.soict.globalict.aims.media.*;
 import hust.soict.globalict.aims.store.Store;
@@ -7,12 +10,30 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
+import javafx.scene.Node;
+
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.stage.Stage;
 
 public class CartController {
     
@@ -66,9 +87,21 @@ public class CartController {
 
     @FXML
     void btnViewStorePressed(ActionEvent event) {
-        // Add your code for view store button press action
+        try {
+            final String STORE_FXML_FILE_PATH = "/hust/soict/globalict/aims/screen/customer/view/Store.fxml";
+            FXMLLoader fxmlLoader =  new FXMLLoader(getClass().getResource(STORE_FXML_FILE_PATH));
+            fxmlLoader.setController(new ViewStoreController(store,cart));
+            Parent root = fxmlLoader.load();
+            Node a =  (Node) event.getSource();
+            Stage stage =  (Stage) a.getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.setTitle("STORE");
+            stage.show();
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+
     }
-    
     @FXML
     public void initialize() {
         colMediaId.setCellValueFactory(new PropertyValueFactory<Media, Integer>("id"));
